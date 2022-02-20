@@ -27,9 +27,9 @@ router.get('/teacher', async (req, res) => {
 //         return res.status(500).json({message:err.message, status:'Failed'});
 //     }
 // })
-router.get('/teacherTotal', async (req, res) => {
+router.get('/teacher/:id', async (req, res) => {
     try {
-        const output = await teacher.find().count().lean().exec()
+        const output = await teacher.findById(req.params.id).populate("class").lean().exec()
 
         return res.status(200).json(output)
     }
